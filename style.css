@@ -1,0 +1,27 @@
+html, body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+#field{
+    display: flex;
+    background-color: darkslategray;
+    padding: 10px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    height: 95vh;
+    margin-block: 1.25vh;
+}
+
+button{
+    position: fixed;
+    padding: 20px;
+    font-size: 20px;
+    color: white;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: green;
+}
