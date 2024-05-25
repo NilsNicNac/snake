@@ -55,7 +55,7 @@ function move() {
         apple = {x: Math.floor(Math.random()*17)*30, y: Math.floor(Math.random()*17)*30};
         score += 1;
         ate = true;
-        document.getElementById("score").innerHTML = "score: " + score;
+        document.getElementById("score").innerHTML = "Score: " + score;
     }
 
     //Check if head coordinates exist in snake arr
@@ -79,7 +79,6 @@ function spawnApple(){
 
 function startGame(){
     document.getElementById("start").style.display = "none";
-    document.getElementById("score").innerHTML = "score: " + score;
     setInterval(move, 200);
 }
 

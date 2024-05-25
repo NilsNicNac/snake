@@ -1,9 +1,15 @@
+#score{
+    font: normal bold 50px sans-serif;
+}
+
 html, body{
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
     padding: 0;
+    flex-direction: column;
+    height: 100vh;
 }
 
 #field{
@@ -12,7 +18,7 @@ html, body{
     padding: 10px;
     padding-right: 5px;
     padding-bottom: 5px;
-    height: 95vh;
+    height: 100vh;
     margin-block: 1.25vh;
 }
 
