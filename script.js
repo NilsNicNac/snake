@@ -1,17 +1,41 @@
+playing = false;
+
 let snake = [ 
     {x: 60, y: 0}, //head
     {x: 30, y: 0}, //segment
     {x: 0, y: 0} // tail
 ];
+let inputQueue = [];
 
 var apple = {x: Math.floor(Math.random()*17)*30, y: Math.floor(Math.random()*17)*30};
 
 var dir = "right";
 
 var score = 0;
-var ate = false
+var ate = false;
 
 function move() {
+    badInput = false;
+    if(inputQueue.length > 0){
+        if(inputQueue[inputQueue.length - 1] === "right" && dir === "left" ){
+            badInput = true;
+        }
+        if(inputQueue[inputQueue.length - 1] === "left" && dir === "right" ){
+            badInput = true;
+        }
+        if(inputQueue[inputQueue.length - 1] == "up" && dir === "down" ){
+            badInput = true;
+        }
+        if(inputQueue[inputQueue.length - 1] === "down" && dir === "up" ){
+            badInput = true;
+        }
+        if(badInput === false){
+            dir = inputQueue.pop();
+        }else{
+            inputQueue.pop();
+        }
+    }
+
     let headX = snake[0].x;
     let headY = snake[0].y;
 
@@ -49,7 +73,8 @@ function move() {
     spawnApple();
     
     if (snake[0].x > 480 || snake[0].x < 0 || snake[0].y > 480 || snake[0].y < 0 ){
-        alert("Game Over");
+        gameOver();
+        clearInterval(intervalId);
     }
     if (snake[0].x === apple.x && snake[0].y === apple.y){
         apple = {x: Math.floor(Math.random()*17)*30, y: Math.floor(Math.random()*17)*30};
@@ -61,11 +86,10 @@ function move() {
     //Check if head coordinates exist in snake arr
     for(i = 1; i < snake.length; i++){
         if(headX === snake[i].x && headY === snake[i].y){
-            alert("Game Over");
+            gameOver();
+            clearInterval(intervalId);
         }
     }
-
-    keystrokeRegistered = false;
 }
 
 function spawnApple(){
@@ -79,7 +103,30 @@ function spawnApple(){
 
 function startGame(){
     document.getElementById("start").style.display = "none";
-    setInterval(move, 200);
+    document.getElementById("game-over").style.display = "none";
+
+    intervalId = setInterval(move, 200);
+
+    snake = [ 
+        {x: 60, y: 0}, //head
+        {x: 30, y: 0}, //segment
+        {x: 0, y: 0} // tail
+    ];
+    inputQueue = []
+    
+    apple = {x: Math.floor(Math.random()*17)*30, y: Math.floor(Math.random()*17)*30};
+    
+    dir = "right";
+    
+    score = 0;
+    ate = false;
+
+    playing = true;
+}
+
+function gameOver(){
+    document.getElementById("game-over").style.display = "flex";
+    playing = false;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -88,28 +135,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("keydown", (event) => {
-    if(event.key === "ArrowRight" || event.key === "d" && dir != "left") {
-        if(keystrokeRegistered === false){
-            dir = "right";
-        }
-        keystrokeRegistered = true;
+    if(event.key === "ArrowRight" || event.key === "d" && inputQueue.length < 3){
+        inputQueue.unshift("right");
     }
-    if(event.key === "ArrowLeft"  || event.key === "a"  && dir != "right") {
-        if(keystrokeRegistered === false){
-            dir = "left";
-        }
-        keystrokeRegistered = true;
+    if(event.key === "ArrowLeft"  || event.key === "a" && inputQueue.length < 3){
+        inputQueue.unshift("left");
     }
-    if(event.key === "ArrowUp"  || event.key === "w"  && dir != "down") {
-        if(keystrokeRegistered === false){
-            dir = "up";
-        }
-        keystrokeRegistered = true;
+    if(event.key === "ArrowUp"  || event.key === "w" && inputQueue.length < 3){
+        inputQueue.unshift("up");
     }
-    if(event.key === "ArrowDown"  || event.key === "s" && dir != "up") {
-        if(keystrokeRegistered === false){
-            dir = "down";
-        }
-        keystrokeRegistered = true;
+    if(event.key === "ArrowDown"  || event.key === "s" && inputQueue.length < 3){
+        inputQueue.unshift("down");
     }
 });

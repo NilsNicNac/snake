@@ -1,4 +1,6 @@
-#score{
+
+
+#score, #game-over-title{
     font: normal bold 50px sans-serif;
 }
 
@@ -30,4 +32,23 @@ button{
     border: 1px solid black;
     border-radius: 15px;
     background-color: green;
+}
+
+#game-over{
+    font-size: 10px;
+    color: white;
+    flex-direction: column;
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000050;
+}
+
+#game-over-title, #restart{
+    margin-bottom: 20px;
+    display: flex;
+    position: relative;
 }
