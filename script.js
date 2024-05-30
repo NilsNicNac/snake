@@ -1,13 +1,13 @@
 playing = false;
 
 let snake = [ 
-    {x: 60, y: 0}, //head
-    {x: 30, y: 0}, //segment
+    {x: 30, y: 0}, //head
+    {x: 15, y: 0}, //segment
     {x: 0, y: 0} // tail
 ];
 let inputQueue = [];
 
-var apple = {x: Math.floor(Math.random()*17)*30, y: Math.floor(Math.random()*17)*30};
+var apple = {x: Math.floor(Math.random()*34)*15, y: Math.floor(Math.random()*17)*15};
 
 var dir = "right";
 
@@ -40,16 +40,16 @@ function move() {
     let headY = snake[0].y;
 
     if(dir === "right") {
-        headX += 30;
+        headX += 15;
     }
     if(dir === "left") {
-        headX -= 30;
+        headX -= 15;
     }
     if(dir === "up") {
-        headY -= 30;
+        headY -= 15;
     }
     if(dir === "down") {
-        headY += 30;
+        headY += 15;
     }
 
     snake.unshift({x: headX, y: headY});
@@ -64,10 +64,10 @@ function move() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "red";
 
-    ctx.fillRect(snake[0].x, snake[0].y, 25, 25);
+    ctx.fillRect(snake[0].x, snake[0].y, 12, 12);
     ctx.fillStyle = "orange";
     for(i = 1; i < snake.length; i++) {
-        ctx.fillRect(snake[i].x,snake[i].y, 25, 25);
+        ctx.fillRect(snake[i].x,snake[i].y, 12, 12);
     }
     console.log("x:", snake[0].x, "y:", snake[0].y)
     spawnApple();
@@ -77,7 +77,7 @@ function move() {
         clearInterval(intervalId);
     }
     if (snake[0].x === apple.x && snake[0].y === apple.y){
-        apple = {x: Math.floor(Math.random()*17)*30, y: Math.floor(Math.random()*17)*30};
+        apple = {x: Math.floor(Math.random()*34)*15, y: Math.floor(Math.random()*17)*15};
         score += 1;
         ate = true;
         document.getElementById("score").innerHTML = "Score: " + score;
@@ -96,7 +96,7 @@ function spawnApple(){
     const canvas = document.getElementById("field");
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = "yellow";
-    ctx.fillRect(apple.x+5, apple.y+5, 15, 15);
+    ctx.fillRect(apple.x+2, apple.y+2, 8, 8);
 }
 
 
@@ -114,7 +114,7 @@ function startGame(){
     ];
     inputQueue = []
     
-    apple = {x: Math.floor(Math.random()*17)*30, y: Math.floor(Math.random()*17)*30};
+    apple = {x: Math.floor(Math.random()*34)*15, y: Math.floor(Math.random()*17)*15};
     
     dir = "right";
     
@@ -130,7 +130,7 @@ function gameOver(){
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    field.height = 510;
+    field.height = 255;
     field.width = 510;
 });
 
