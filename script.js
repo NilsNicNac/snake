@@ -1,8 +1,8 @@
 
 //config
-fieldWidth = 510;
-fieldHeight = 255;  //fieldHeight AND fieldWidth MUST BE MULTIPLE OF tileSize!!
-tileSize = 15;
+fieldWidth = 1680;
+fieldHeight = 840;  //fieldHeight AND fieldWidth MUST BE MULTIPLE OF tileSize!!
+tileSize = 60;
 fps = 5;            //controls speed
 
 widthByTile = fieldWidth/tileSize;
@@ -18,8 +18,8 @@ let snake = [
 let inputQueue = [];
 
 var apple = {
-    x: Math.floor(Math.random()*widthByTile)*tileSize, 
-    y: Math.floor(Math.random()*heightByTile)*tileSize
+    x: Math.floor(Math.random()*widthByTile), 
+    y: Math.floor(Math.random()*heightByTile)
 };
 
 var dir = "right";
@@ -77,10 +77,10 @@ function move() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "red";
     
-    ctx.fillRect(snake[0].x * tileSize, snake[0].y * tileSize, 12, 12);
+    ctx.fillRect(snake[0].x * tileSize, snake[0].y * tileSize, 50, 50);
     ctx.fillStyle = "orange";
     for(i = 1; i < snake.length; i++) {
-        ctx.fillRect(snake[i].x * tileSize, snake[i].y * tileSize, 12, 12);
+        ctx.fillRect(snake[i].x * tileSize, snake[i].y * tileSize, 50, 50);
     }
     
     
@@ -89,7 +89,7 @@ function move() {
         clearInterval(intervalId);
     }
     if (snake[0].x === apple.x && snake[0].y === apple.y){
-        apple = {x: Math.floor(Math.random()*widthByTile), y: Math.floor(Math.random()*widthByTile)};
+        apple = {x: Math.floor(Math.random()*widthByTile), y: Math.floor(Math.random()*heightByTile)};
         score += 1;
         ate = true;
         document.getElementById("score").innerHTML = "Score: " + score;
@@ -109,7 +109,7 @@ function spawnApple(){
     const canvas = document.getElementById("field");
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = "yellow";
-    ctx.fillRect(apple.x*tileSize + 1, apple.y*tileSize + 1, tileSize-4, tileSize-4);
+    ctx.fillRect(apple.x*tileSize + 10, apple.y*tileSize + 10, tileSize-30, tileSize-30); //tilesize offset needs to be 2*tilesize offset + diff between tilesize and snake segment size
 }
 
 function startGame(){
