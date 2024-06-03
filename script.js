@@ -28,6 +28,9 @@ var score = 0;
 var ate = false;
 
 function move() {
+
+    console.log(inputQueue.length)
+
     badInput = false;
     if(inputQueue.length > 0){
         if(inputQueue[inputQueue.length - 1] === "right" && dir === "left" ){
@@ -144,16 +147,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("keydown", (event) => {
-    if(event.key === "ArrowRight" || event.key === "d" && inputQueue.length < 3){
+    if((event.key === "ArrowRight" || event.key === "d") && (inputQueue.length < 3)){
         inputQueue.unshift("right");
     }
-    if(event.key === "ArrowLeft"  || event.key === "a" && inputQueue.length < 3){
+    if((event.key === "ArrowLeft"  || event.key === "a") && (inputQueue.length < 3)){
         inputQueue.unshift("left");
     }
-    if(event.key === "ArrowUp"  || event.key === "w" && inputQueue.length < 3){
+    if((event.key === "ArrowUp"  || event.key === "w") && (inputQueue.length < 3)){
         inputQueue.unshift("up");
     }
-    if(event.key === "ArrowDown"  || event.key === "s" && inputQueue.length < 3){
+    if((event.key === "ArrowDown"  || event.key === "s") && (inputQueue.length < 3)){
         inputQueue.unshift("down");
     }
 });
