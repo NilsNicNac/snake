@@ -1,8 +1,14 @@
 
 //config
+<<<<<<< HEAD
 fieldWidth = 1600;
 fieldHeight = 800;  //fieldHeight AND fieldWidth MUST BE MULTIPLE OF tileSize!!
 tileSize = 40;
+=======
+fieldWidth = 1680;
+fieldHeight = 840;  //fieldHeight AND fieldWidth MUST BE MULTIPLE OF tileSize!!
+tileSize = 60;
+>>>>>>> 3a552c1886d76bd23382b54e3b2cd5b70e5954e8
 fps = 5;            //controls speed
 
 widthByTile = fieldWidth/tileSize;
@@ -30,6 +36,11 @@ var ate = false;
 function move() {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    console.log(inputQueue.length)
+
+>>>>>>> 3a552c1886d76bd23382b54e3b2cd5b70e5954e8
 =======
     console.log(inputQueue.length)
 
@@ -98,10 +109,17 @@ function move() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "red";
     
+<<<<<<< HEAD
     ctx.fillRect(snake[0].x * tileSize, snake[0].y * tileSize, 39, 39);
     ctx.fillStyle = "orange";
     for(i = 1; i < snake.length; i++) {
         ctx.fillRect(snake[i].x * tileSize, snake[i].y * tileSize, 39, 39);
+=======
+    ctx.fillRect(snake[0].x * tileSize, snake[0].y * tileSize, 50, 50);
+    ctx.fillStyle = "orange";
+    for(i = 1; i < snake.length; i++) {
+        ctx.fillRect(snake[i].x * tileSize, snake[i].y * tileSize, 50, 50);
+>>>>>>> 3a552c1886d76bd23382b54e3b2cd5b70e5954e8
     }
     
     
@@ -121,7 +139,11 @@ function spawnApple(){
     const canvas = document.getElementById("field");
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = "yellow";
+<<<<<<< HEAD
     ctx.fillRect(apple.x*tileSize + 7, apple.y*tileSize + 7, tileSize-15, tileSize-15); 
+=======
+    ctx.fillRect(apple.x*tileSize + 10, apple.y*tileSize + 10, tileSize-30, tileSize-30); //tilesize offset needs to be 2*tilesize offset + diff between tilesize and snake segment size
+>>>>>>> 3a552c1886d76bd23382b54e3b2cd5b70e5954e8
 }
 
 function startGame(){
