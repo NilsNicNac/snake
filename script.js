@@ -1,8 +1,8 @@
 
 //config
-fieldWidth = 750;
-fieldHeight = 375;  //fieldHeight AND fieldWidth MUST BE MULTIPLE OF tileSize!!
-tileSize = 25;
+fieldWidth = 1600;
+fieldHeight = 800;  //fieldHeight AND fieldWidth MUST BE MULTIPLE OF tileSize!!
+tileSize = 40;
 fps = 5;            //controls speed
 
 widthByTile = fieldWidth/tileSize;
@@ -18,8 +18,8 @@ let snake = [
 let inputQueue = [];
 
 var apple = {
-    x: Math.floor(Math.random()*widthByTile)*tileSize, 
-    y: Math.floor(Math.random()*heightByTile)*tileSize
+    x: Math.floor(Math.random()*widthByTile), 
+    y: Math.floor(Math.random()*heightByTile)
 };
 
 var dir = "right";
@@ -28,6 +28,12 @@ var score = 0;
 var ate = false;
 
 function move() {
+
+<<<<<<< HEAD
+=======
+    console.log(inputQueue.length)
+
+>>>>>>> 3a552c1886d76bd23382b54e3b2cd5b70e5954e8
     badInput = false;
     if(inputQueue.length > 0){
         if(inputQueue[inputQueue.length - 1] === "right" && dir === "left" ){
@@ -67,42 +73,47 @@ function move() {
 
     snake.unshift({x: headX, y: headY});
 
+
     if(!ate){
         snake.pop();
     }
     ate = false;
+
+    for(i = 1; i < snake.length; i++){
+        if(headX === snake[i].x && headY === snake[i].y){
+            gameOver();
+            clearInterval(intervalId);
+            return;
+        }
+    }
+    
+    if (snake[0].x >= widthByTile || snake[0].x < 0 || snake[0].y >= heightByTile || snake[0].y < 0 ){
+        gameOver();
+        clearInterval(intervalId);
+        return;
+    }
 
     const canvas = document.getElementById("field");
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "red";
     
-    ctx.fillRect(snake[0].x * tileSize, snake[0].y * tileSize, tileSize-5, tileSize-5);
+    ctx.fillRect(snake[0].x * tileSize, snake[0].y * tileSize, 39, 39);
     ctx.fillStyle = "orange";
     for(i = 1; i < snake.length; i++) {
-        ctx.fillRect(snake[i].x * tileSize, snake[i].y * tileSize, tileSize-5, tileSize-5);
+        ctx.fillRect(snake[i].x * tileSize, snake[i].y * tileSize, 39, 39);
     }
     
     
-    if (snake[0].x >= widthByTile || snake[0].x < 0 || snake[0].y >= heightByTile || snake[0].y < 0 ){
-        gameOver();
-        clearInterval(intervalId);
-    }
     if (snake[0].x === apple.x && snake[0].y === apple.y){
         apple = {x: Math.floor(Math.random()*widthByTile), y: Math.floor(Math.random()*heightByTile)};
-        spawnApple();
         score += 1;
         ate = true;
         document.getElementById("score").innerHTML = "Score: " + score;
     }
 
     //Check if head coordinates exist in snake arr
-    for(i = 1; i < snake.length; i++){
-        if(headX === snake[i].x && headY === snake[i].y){
-            gameOver();
-            clearInterval(intervalId);
-        }
-    }
+    
     spawnApple();
 }
 
@@ -110,7 +121,7 @@ function spawnApple(){
     const canvas = document.getElementById("field");
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = "yellow";
-    ctx.fillRect(apple.x*tileSize + 2, apple.y*tileSize + 2, tileSize-9, tileSize-9);
+    ctx.fillRect(apple.x*tileSize + 7, apple.y*tileSize + 7, tileSize-15, tileSize-15); 
 }
 
 function startGame(){
@@ -145,16 +156,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("keydown", (event) => {
-    if(event.key === "ArrowRight" || event.key === "d" && inputQueue.length < 3){
+    if((event.key === "ArrowRight" || event.key === "d") && (inputQueue.length < 3)){
         inputQueue.unshift("right");
     }
-    if(event.key === "ArrowLeft"  || event.key === "a" && inputQueue.length < 3){
+    if((event.key === "ArrowLeft"  || event.key === "a") && (inputQueue.length < 3)){
         inputQueue.unshift("left");
     }
-    if(event.key === "ArrowUp"  || event.key === "w" && inputQueue.length < 3){
+    if((event.key === "ArrowUp"  || event.key === "w") && (inputQueue.length < 3)){
         inputQueue.unshift("up");
     }
-    if(event.key === "ArrowDown"  || event.key === "s" && inputQueue.length < 3){
+    if((event.key === "ArrowDown"  || event.key === "s") && (inputQueue.length < 3)){
         inputQueue.unshift("down");
     }
 });
